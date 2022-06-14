@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const consoleTable = require('console.table');
+const { resolve } = require('path');
+// const consoleTable = require('console.table');
 require('dotenv').config();
 
 
@@ -126,7 +127,7 @@ const addRole = addRoleData => {
                 type: 'list',
                 name: 'roleDept',
                 message: 'What department does the role belong to?',
-                choices: deptList   
+                choices: deptList
             }
 
         ])
@@ -152,9 +153,37 @@ const addRole = addRoleData => {
 }
 
 const addEmployee = addEmployeeData => {
-    const sql = `SELECT id, title FROM role`;
-    const sql2 = `SELECT id, CONCAT(first_name, " ", last_name) AS Employee FROM employee`;
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'firstName',
+            message: "What is the employee's fist name?"
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: "What is the employee's last name?"
+        }
+    ])
+        .then(roleData => {
+            const sql = `SELECT id, title FROM role`;
+            db.query(sql, (err, roles) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                return inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'role',
+                        message: "What is the employee's role?",
+                        choices: roles
+                    }
+                ])
+            })
+        })
 }
 
-firstAction()
+// firstAction()
 // addRole()
+addEmployee()
