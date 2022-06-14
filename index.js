@@ -152,6 +152,58 @@ const addRole = addRoleData => {
 
 }
 
+// const addEmployee = addEmployeeData => {
+//     const sql = `SELECT id, title AS name FROM role`;
+
+//     db.query(sql, (err, roles) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         return inquirer.prompt([
+//             {
+//                 type: 'input',
+//                 name: 'firstName',
+//                 message: "What is the employee's fist name?"
+//             },
+//             {
+//                 type: 'input',
+//                 name: 'lastName',
+//                 message: "What is the employee's last name?"
+//             },
+//             {
+//                 type: 'list',
+//                 name: 'role',
+//                 message: "What is the employee's role?",
+//                 choices: roles
+//             }
+
+//         ])
+//     })
+//         .then(getIndexes => {
+//             const sql2 = `SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employee`;
+//             db.query(sql2, (err, employeeList) => {
+//                 if (err) {
+//                     console.log(err);
+//                     return;
+//                 }
+//                 return inquirer.prompt([
+//                     {
+//                         type: 'list',
+//                         name: 'manager',
+//                         message: "Who is the employee's manager?",
+//                         choices: employeeList
+//                     }
+//                 ])
+//             })
+//             const roleIndex = roles.filter(name => addEmployeeData.role === name.name)[0];
+//             console.log(roleIndex.id);
+
+//             const empIndex = employeeList.filter(name => addEmployeeData.manager === name.name)[0];
+//             console.log(empIndex.id);
+//         })
+// }
+
 const addEmployee = addEmployeeData => {
     return inquirer.prompt([
         {
@@ -166,7 +218,7 @@ const addEmployee = addEmployeeData => {
         }
     ])
         .then(roleData => {
-            const sql = `SELECT id, title FROM role`;
+            const sql = `SELECT id, title AS name FROM role`;
             db.query(sql, (err, roles) => {
                 if (err) {
                     console.log(err);
@@ -178,6 +230,23 @@ const addEmployee = addEmployeeData => {
                         name: 'role',
                         message: "What is the employee's role?",
                         choices: roles
+                    }
+                ])
+            })
+        })
+        .then(empData => {
+            const sql = `SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employee`;
+            db.query(sql, (err, employeeList) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                return inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'employees',
+                        message: "Who is the employee's manager?",
+                        choices: employeeList
                     }
                 ])
             })
