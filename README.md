@@ -13,7 +13,7 @@ This is a CLI application that allows a person to view information about their c
 * dotenv
 
 ### Video Link
-[https://drive.google.com/file/d/1j3VlrxQwN1GyZAkAhbHgZX307j2mWhon/view](https://drive.google.com/file/d/1j3VlrxQwN1GyZAkAhbHgZX307j2mWhon/view)
+[https://drive.google.com/file/d/1XtaufUzwQ14bcA75cQG7IqYIQimComU1/view](https://drive.google.com/file/d/1XtaufUzwQ14bcA75cQG7IqYIQimComU1/view)
 
 ### Created by
 Angel Van de Feniks
